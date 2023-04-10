@@ -267,6 +267,29 @@ Function ValidationSet(sheetName As String)
     ws.Range("B9").Value = "Sheet_Delete"
     
 End Function
+Function SheetList(sheetName As String)
+    Dim ws As Worksheet
+    Dim wsList As String
+    Dim wsName As String
+    Dim i As Integer
+     
+    Set ws = ThisWorkbook.Sheets(sheetName)
+    
+    'Cell Value
+    ws.Range("C2").Value = "Sheet_List"
+    
+    i = 1
+    While i <= ThisWorkbook.Sheets.Count
+
+        'For Each wbs In ThisWorkbook.Sheets
+           Cells(i + 2, 3).Value = ThisWorkbook.Sheets(i).Name
+           i = i + 1
+        'Next wbs
+        
+    Wend
+
+End Function
+
 
 Sub VersionHistorySheet()
     Dim sheetName As String
@@ -275,6 +298,7 @@ Sub VersionHistorySheet()
     CreateSheetIfNotExists (sheetName)
     ResizeColumnsInSheet (sheetName)
     ValidationSet (sheetName)
+    SheetList (sheetName)
     
     sheetName = "VersionHistory"
     CreateSheetIfNotExists (sheetName)
