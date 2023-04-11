@@ -267,7 +267,7 @@ Function ValidationSet(sheetName As String)
     ws.Range("B9").Value = "Sheet_Delete"
     
 End Function
-Function SheetList(sheetName As String)
+Function sheetList(sheetName As String)
     Dim ws As Worksheet
     Dim wsList As String
     Dim wsName As String
@@ -290,6 +290,46 @@ Function SheetList(sheetName As String)
 
 End Function
 
+Function DeleteSheet(sheetName As String)
+    Dim ws As Worksheet
+    
+    On Error Resume Next
+    Set ws = ThisWorkbook.Sheets(sheetName)
+    On Error GoTo 0
+    
+    If Not ws Is Nothing Then
+        Application.DisplayAlerts = False
+        ws.Delete
+        Application.DisplayAlerts = True
+    End If
+End Function
+
+Function SheetListReset()
+    
+    Dim wbkSheet As Integer
+    Dim myList As Variant
+    Dim myValue As Variant
+    Dim i As Integer
+    Dim found As Boolean
+
+    myList = Array("VersionHistory", "Validation")
+
+    For i = LBound(myList) To UBound(myList)
+        wbkSheet = 1
+        While wbkSheet <= ThisWorkbook.Sheets.Count
+            If myList(i) <> ThisWorkbook.Sheets(wbkSheet).Name Then
+            
+                DeleteSheet (ThisWorkbook.Sheets(wbkSheet).Name)
+            Else
+                wbkSheet = wbkSheet + 1
+            End If
+        Wend
+        
+    Next i
+
+End Function
+
+
 
 Sub VersionHistorySheet()
     Dim sheetName As String
@@ -298,7 +338,7 @@ Sub VersionHistorySheet()
     CreateSheetIfNotExists (sheetName)
     ResizeColumnsInSheet (sheetName)
     ValidationSet (sheetName)
-    SheetList (sheetName)
+    sheetList (sheetName)
     
     sheetName = "VersionHistory"
     CreateSheetIfNotExists (sheetName)
