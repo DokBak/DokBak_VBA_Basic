@@ -121,8 +121,8 @@ Function VersionHistorySet(sheetName As String)
     
     'Cell Format
     ws.Range("B4").NumberFormat = "General"
-    ws.Range("W4").NumberFormat = "General"
-    ws.Range("AB4").NumberFormat = "General"
+    ws.Range("W4").NumberFormat = "0.0"
+    ws.Range("AB4").NumberFormat = "YYYY/MM/DD"
     ws.Range("AG4").NumberFormat = "General"
     ws.Range("AL4").NumberFormat = "General"
     
