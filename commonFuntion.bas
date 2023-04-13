@@ -213,8 +213,8 @@ Function VersionHistorySet(sheetName As String)
     ws.Range("F8").NumberFormat = "YYYY/MM/DD"
     
     'Cell Value
-    ws.Range("B8").Value = 1
-    ws.Range("D8").Value = 1
+    ws.Range("B8").Formula = "=row()-7"
+    ws.Range("D8").Formula = "=if(B8<>"""",if(B8=1,1,D7+0.1),)"
     ws.Range("F8").Value = "2023/01/01"
     Range("J8:M8").Select
     Application.CutCopyMode = False
