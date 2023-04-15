@@ -19,7 +19,11 @@ Function CreateSheetIfNotExists(sheetName As String) As Worksheet
     
     'Create New Sheet
     If Not isSheetExists Then
-        Set newSheet = ThisWorkbook.Sheets.Add(After:=ThisWorkbook.Sheets(ThisWorkbook.Sheets.Count))
+        If sheetName = "VersionHistory" Then
+            Set newSheet = ThisWorkbook.Sheets.Add(After:=ThisWorkbook.Sheets(1))
+        Else
+            Set newSheet = ThisWorkbook.Sheets.Add(After:=ThisWorkbook.Sheets(ThisWorkbook.Sheets.Count))
+        End If
         newSheet.Name = sheetName
         Set CreateSheetIfNotExists = newSheet
     Else
@@ -266,8 +270,10 @@ Function ValidationSet(sheetName As String)
     ws.Range("B8").Value = "Sheet_Modify"
     ws.Range("B9").Value = "Sheet_Delete"
     
+    
+    
 End Function
-Function sheetList(sheetName As String)
+Function SheetList(sheetName As String)
     Dim ws As Worksheet
     Dim wsList As String
     Dim wsName As String
@@ -278,72 +284,80 @@ Function sheetList(sheetName As String)
     'Cell Value
     ws.Range("C2").Value = "Sheet_List"
     
+    ws.Range("C:C").ClearContents
+    
     i = 1
     While i <= ThisWorkbook.Sheets.Count
-
-        'For Each wbs In ThisWorkbook.Sheets
-           Cells(i + 2, 3).Value = ThisWorkbook.Sheets(i).Name
-           i = i + 1
-        'Next wbs
-        
+       Cells(i + 2, 3).Value = ThisWorkbook.Sheets(i).Name
+       i = i + 1
     Wend
 
 End Function
 
-Function DeleteSheet(sheetName As String)
+Function SheetsInitialize()
+    Dim wbkWorkBook As Workbook
+    Set wbkWorkBook = ThisWorkbook
     Dim ws As Worksheet
     
-    On Error Resume Next
-    Set ws = ThisWorkbook.Sheets(sheetName)
-    On Error GoTo 0
+    Dim i, Delete_Sheet_Number, All_Sheets_Count, Del_cnt As Integer
+    All_Sheets_Count = wbkWorkBook.Worksheets.Count
     
-    If Not ws Is Nothing Then
-        Application.DisplayAlerts = False
-        ws.Delete
-        Application.DisplayAlerts = True
-    End If
-End Function
-
-Function SheetListReset()
+    Dim Not_Delete_Sheet_Name As String
+    Dim Del_Sheet As String
     
-    Dim wbkSheet As Integer
-    Dim myList As Variant
-    Dim myValue As Variant
-    Dim i As Integer
-    Dim found As Boolean
-
-    myList = Array("VersionHistory", "Validation")
-
-    For i = LBound(myList) To UBound(myList)
-        wbkSheet = 1
-        While wbkSheet <= ThisWorkbook.Sheets.Count
-            If myList(i) <> ThisWorkbook.Sheets(wbkSheet).Name Then
-            
-                DeleteSheet (ThisWorkbook.Sheets(wbkSheet).Name)
-            Else
-                wbkSheet = wbkSheet + 1
-            End If
-        Wend
+    Not_Delete_Sheet_Name = "[Validation, VersionHistory]"
+    
+    Del_cnt = 0
+    
+    'Dim rc As VbMsgBoxResult
+    'rc = MsgBox("Sheets Initialize", vbYesNo + vbQuestion)
+    
+    'If rc = vbYes Then
         
-    Next i
-
+        Dim newSheet As Worksheet
+        Set newSheet = ThisWorkbook.Sheets.Add(After:=ThisWorkbook.Sheets(ThisWorkbook.Sheets.Count))
+        newSheet.Name = "DeleteSheet"
+        Set ws = wbkWorkBook.Sheets("DeleteSheet")
+        With ws
+            For Delete_Sheet_Number = 1 To All_Sheets_Count
+                If InStr(1, Not_Delete_Sheet_Name, wbkWorkBook.Sheets(Delete_Sheet_Number).Name) = 0 Then
+                    Del_cnt = Del_cnt + 1
+                    Worksheets("DeleteSheet").Cells(1, Del_cnt) = wbkWorkBook.Sheets(Delete_Sheet_Number).Name
+                End If
+            Next Delete_Sheet_Number
+            
+            For i = 1 To Del_cnt
+                Application.DisplayAlerts = False
+                Del_Sheet = Worksheets("DeleteSheet").Cells(1, i).Value
+                
+                wbkWorkBook.Sheets(Del_Sheet).Delete
+            Next i
+                  
+        End With
+    'End If
+    
+    wbkWorkBook.Sheets("DeleteSheet").Delete
 End Function
-
-
 
 Sub VersionHistorySheet()
     Dim sheetName As String
     
+    'Validation Sheet Create
     sheetName = "Validation"
     CreateSheetIfNotExists (sheetName)
     ResizeColumnsInSheet (sheetName)
     ValidationSet (sheetName)
-    sheetList (sheetName)
     
+    'VersionHistory Sheet Create
     sheetName = "VersionHistory"
     CreateSheetIfNotExists (sheetName)
     ResizeColumnsInSheet (sheetName)
     VersionHistorySet (sheetName)
-        
+       
+    'Default Sheets
+    SheetsInitialize
+    
+    'Validation Sheet Add
+    sheetName = "Validation"
+    SheetList (sheetName)
 End Sub
-
