@@ -8,7 +8,7 @@ Function CreateSheetIfNotExists(sheetName As String) As Worksheet
     Dim newSheet As Worksheet
     
     isSheetExists = False
-    
+
     'Sheet Check
     For Each ws In ThisWorkbook.Sheets
         If ws.Name = sheetName Then
@@ -36,6 +36,8 @@ Function ResizeColumnsInSheet(sheetName As String)
     Dim ws As Worksheet
     Dim lastColumn As Long
     Dim i As Long
+     
+    Worksheets(sheetName).Activate
     
     On Error Resume Next
     Set ws = ThisWorkbook.Sheets(sheetName)
@@ -56,6 +58,8 @@ Function VersionHistorySet(sheetName As String)
     
     Dim ws As Worksheet
     Dim rng As Range
+    
+    Worksheets(sheetName).Activate
     
     Set ws = ThisWorkbook.Sheets(sheetName)
     'ич
@@ -247,6 +251,8 @@ Function ValidationSet(sheetName As String)
     Dim ws As Worksheet
     Dim rng As Range
     
+    Worksheets(sheetName).Activate
+    
     Set ws = ThisWorkbook.Sheets(sheetName)
     
     'ич
@@ -270,7 +276,7 @@ Function ValidationSet(sheetName As String)
     ws.Range("B8").Value = "Sheet_Modify"
     ws.Range("B9").Value = "Sheet_Delete"
     
-    
+    ws.Range("B:B").EntireColumn.AutoFit
     
 End Function
 Function SheetList(sheetName As String)
@@ -278,20 +284,40 @@ Function SheetList(sheetName As String)
     Dim wsList As String
     Dim wsName As String
     Dim i As Integer
-     
+    
+    Worksheets(sheetName).Activate
+    
     Set ws = ThisWorkbook.Sheets(sheetName)
     
+    ws.Range("C:C").ClearContents
+        
     'Cell Value
     ws.Range("C2").Value = "Sheet_List"
+    'Cell Color
+    ws.Range("C2").Interior.Color = RGB(102, 315, 102)
     
-    ws.Range("C:C").ClearContents
+    With ws.Cells(2, 3).Borders
+    .LineStyle = xlContinuous 'line
+    .Color = RGB(0, 0, 0) ' black
+    .Weight = xlThin 'xlThin, xlMedium
+    End With
     
     i = 1
     While i <= ThisWorkbook.Sheets.Count
        Cells(i + 2, 3).Value = ThisWorkbook.Sheets(i).Name
+       
+           'Cell Border
+         With ws.Cells(i + 2, 3).Borders
+        .LineStyle = xlContinuous 'line
+        .Color = RGB(0, 0, 0) ' black
+        .Weight = xlThin 'xlThin, xlMedium
+        End With
+       
        i = i + 1
     Wend
 
+    ws.Range("C:C").EntireColumn.AutoFit
+    
 End Function
 
 Function SheetsInitialize()
@@ -305,7 +331,9 @@ Function SheetsInitialize()
     Dim Not_Delete_Sheet_Name As String
     Dim Del_Sheet As String
     
-    Not_Delete_Sheet_Name = "[Validation, VersionHistory]"
+    Worksheets("Validation").Activate
+    
+    Not_Delete_Sheet_Name = "[Validation, VersionHistory, Main]"
     
     Del_cnt = 0
     
@@ -339,6 +367,16 @@ Function SheetsInitialize()
     wbkWorkBook.Sheets("DeleteSheet").Delete
 End Function
 
+Function HideSheet(sheetName As String)
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(sheetName)
+    
+    Worksheets("Main").Activate
+    
+    ws.Visible = xlSheetHidden
+
+End Function
+
 Sub VersionHistorySheet()
     Dim sheetName As String
     
@@ -353,11 +391,21 @@ Sub VersionHistorySheet()
     CreateSheetIfNotExists (sheetName)
     ResizeColumnsInSheet (sheetName)
     VersionHistorySet (sheetName)
-       
+    
+    'Main Sheet Create
+    sheetName = "Main"
+    CreateSheetIfNotExists (sheetName)
+    ResizeColumnsInSheet (sheetName)
+
     'Default Sheets
     SheetsInitialize
     
     'Validation Sheet Add
     sheetName = "Validation"
     SheetList (sheetName)
+    
+    'SheetHide
+    sheetName = "Validation"
+    HideSheet (sheetName)
 End Sub
+
