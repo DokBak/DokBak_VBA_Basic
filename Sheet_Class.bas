@@ -21,5 +21,21 @@ Sub ThisWorkbookCreateSheets()
     ws.Name = "Last Sheet After"
     
 End Sub
+Sub ThisWorkbookExists()
 
+    Dim ws As Worksheet
+    Dim isSheetExists As Boolean
+    Dim checkSheet As String
+    
+    checkSheet = "checkSheetName"
+    isSheetExists = False
+    
+    For Each ws In ThisWorkbook.Sheets
+        If ws.Name = checkSheet Then
+            isSheetExists = True
+            Exit For
+        End If
+    Next ws
+    
+End Sub
 
