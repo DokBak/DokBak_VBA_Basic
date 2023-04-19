@@ -39,3 +39,53 @@ Sub ThisWorkbookExists()
     
 End Sub
 
+Sub ChangeSheetColor()
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets("Main")
+    
+    ws.Tab.Color = RGB(255, 0, 0)
+    
+    ws.Tab.ThemeColor = xlThemeColorDark1
+    ws.Tab.TintAndShade = 0
+
+End Sub
+
+Sub HideSheet()
+    
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets("Main")
+    
+    ws.Visible = xlSheetHidden
+
+End Sub
+
+Sub UnHideSheet()
+    
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets("Main")
+    
+    ws.Visible = xlSheetVisible
+
+End Sub
+
+Sub ProtectSheet()
+    
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets("Main")
+
+    ws.Protect Password:="mypassword", DrawingObjects:=True, Contents:=True, Scenarios:=True
+    'DrawingObjects :도형, 그림, 차트 등의 그래픽 객체를 수정 권한설정
+    'Contents :셀의 내용의 수정 권한설정
+    
+End Sub
+
+Sub UnprotectSheet()
+    
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets("Main")
+    
+    ws.Unprotect Password:="mypassword"
+    
+End Sub
+
