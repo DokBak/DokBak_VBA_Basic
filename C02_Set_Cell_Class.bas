@@ -217,10 +217,10 @@ Function Set_Phonetics(SheetName As String)
         End If
     Next cell
     ws.Range("J2:J10").Phonetics.Visible = True
-    Range("J2:J10").Characters(1, 3).PhoneticCharacters = "Phonetics " & "X" & " Phonetics"
-    Range("J2:J10").Phonetics.Alignment = xlPhoneticAlignLeft
-    Range("J4:J10").Phonetics.Alignment = xlPhoneticAlignDistributed
-    Range("J8:J10").Phonetics.Alignment = xlPhoneticAlignCenter
+    ws.Range("J2:J10").Characters(1, 3).PhoneticCharacters = "Phonetics " & "X" & " Phonetics"
+    ws.Range("J2:J10").Phonetics.Alignment = xlPhoneticAlignLeft
+    ws.Range("J4:J10").Phonetics.Alignment = xlPhoneticAlignDistributed
+    ws.Range("J8:J10").Phonetics.Alignment = xlPhoneticAlignCenter
     ws.Range("J1:J10").EntireColumn.AutoFit
     
 End Function
@@ -240,9 +240,77 @@ Function Set_ClearContents(SheetName As String)
         End If
     Next cell
 
-    Range("K6:K10").ClearContents
+    ws.Range("K6:K10").ClearContents
     
     ws.Range("K1:K10").EntireColumn.AutoFit
     
 End Function
+
+Function Set_Borders(SheetName As String)
+
+    Dim ws As Worksheet
+    Dim cell As Variant
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    ws.Range("L1") = "Borders"
+    For Each cell In Range("L2:L27")
+        If cell.Row() < 3 Then
+            cell.Value = "Borders(xlEdgeTop).LineStyle = xlContinuous "
+        ElseIf cell.Row() < 4 Then
+            cell.Value = "Borders(xlEdgeBottom).LineStyle = xlDash "
+        ElseIf cell.Row() < 5 Then
+            cell.Value = "Borders(xlEdgeLeft).LineStyle = xlDashDot "
+        ElseIf cell.Row() < 6 Then
+            cell.Value = "Borders(xlEdgeRight).LineStyle = xlDashDotDot "
+        ElseIf cell.Row() < 8 Then
+            cell.Value = "Borders(xlInsideVertical).LineStyle = xlDot "
+        ElseIf cell.Row() < 9 Then
+            cell.Value = "Borders(xlInsideHorizontal).LineStyle = xlDouble "
+        ElseIf cell.Row() < 10 Then
+            cell.Value = "Borders(xlDiagonalDown).LineStyle = xlContinuous "
+        ElseIf cell.Row() < 11 Then
+            cell.Value = "Borders(xlDiagonalDown).LineStyle = xlLineStyleNone "
+        ElseIf cell.Row() < 13 Then
+            cell.Value = "Borders.Weight = xlThick "
+        ElseIf cell.Row() = 13 Then
+        ElseIf cell.Row() < 16 Then
+            cell.Value = "Borders.Weight = xlMedium "
+        ElseIf cell.Row() = 16 Then
+        ElseIf cell.Row() < 19 Then
+            cell.Value = "Borders.Weight = xlThick "
+        ElseIf cell.Row() = 19 Then
+        ElseIf cell.Row() < 22 Then
+            cell.Value = "Borders.Weight = xlHairline "
+        ElseIf cell.Row() = 22 Then
+        ElseIf cell.Row() < 25 Then
+            cell.Value = "Borders.Color = RGB(255, 0, 0) "
+        ElseIf cell.Row() = 25 Then
+        Else
+            cell.Value = "Borders.Color = xlRed"
+        End If
+    Next cell
+
+    ws.Range("L2:M2").Borders(xlEdgeTop).LineStyle = xlContinuous
+    ws.Range("L3:M3").Borders(xlEdgeBottom).LineStyle = xlDash
+    ws.Range("L4:M4").Borders(xlEdgeLeft).LineStyle = xlDashDot
+    ws.Range("L5:M5").Borders(xlEdgeRight).LineStyle = xlDashDotDot
+    ws.Range("L6:M6").Borders(xlInsideVertical).LineStyle = xlDot
+    ws.Range("L7:M8").Borders(xlInsideHorizontal).LineStyle = xlDouble
+    ws.Range("L9:M9").Borders(xlDiagonalDown).LineStyle = xlContinuous
+    ws.Range("L10:M10").Borders(xlDiagonalDown).LineStyle = xlLineStyleNone
+    
+    ws.Range("L11:M12").Borders.Weight = xlThick
+    ws.Range("L14:M15").Borders.Weight = xlMedium
+    ws.Range("L17:M18").Borders.Weight = xlThick
+    ws.Range("L20:M21").Borders.Weight = xlHairline
+    
+    ws.Range("L23:M24").Borders.Weight = xlThick
+    ws.Range("L23:M24").Borders.Color = RGB(255, 0, 255)
+    
+    ws.Range("L26:M27").Borders.Weight = xlThick
+    ws.Range("L26:M27").Borders.Color = vbRed
+    ws.Range("L1:M27").EntireColumn.AutoFit
+    
+End Function
+
 
