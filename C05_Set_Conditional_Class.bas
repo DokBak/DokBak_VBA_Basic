@@ -84,7 +84,12 @@ Function Set_Conditional_Sheet(SheetName As String)
         End If
     Next cell
     
-    ws.Range("A2:I40").EntireColumn.AutoFit
+    'Set_xlBlanksCondition
+    For Each cell In Range("A39:B43")
+        cell.Value = cell.Row() - 38
+    Next cell
+    
+    ws.Range("A2:I50").EntireColumn.AutoFit
     
 End Function
 
@@ -216,3 +221,24 @@ Function Set_xlTimePeriod(SheetName As String)
     ws.Range("A25:O36").EntireColumn.AutoFit
 
 End Function
+
+Function Set_xlBlanksCondition(SheetName As String)
+
+    Dim ws As Worksheet
+    Dim cell As Variant
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    ws.Range("A38").Value = "xlBlanksCondition"
+    
+    ws.Range("B38").Value = "xlNoBlanksCondition"
+    ws.Range("B39:B43").FormatConditions.Add Type:=xlNoBlanksCondition
+    ws.Range("B39:B43").FormatConditions(1).Interior.Color = vbRed
+    
+    ws.Range("C38").Value = "xlBlanksCondition"
+    ws.Range("C39:C43").FormatConditions.Add Type:=xlBlanksCondition
+    ws.Range("C39:C43").FormatConditions(1).Interior.Color = vbGreen
+    
+    ws.Range("A38:C43").EntireColumn.AutoFit
+
+End Function
+
