@@ -89,6 +89,40 @@ Function Set_Conditional_Sheet(SheetName As String)
         cell.Value = cell.Row() - 38
     Next cell
     
+    'Set_xlNoErrorsCondition
+    For Each cell In Range("A46:A55")
+        If cell.Row() - 45 <= 6 Then
+            cell.Value = cell.Row() - 45
+        Else
+            cell.Value = cell.Row() - 47
+        End If
+    Next cell
+    For Each cell In Range("B46:C53")
+        If cell.Row() - 45 = 1 Then
+            cell.Value = "=2/0" '#DIV/0!
+        ElseIf cell.Row() - 45 = 2 Then
+            cell.Value = "=d/2" '#NAME?
+        ElseIf cell.Row() - 45 = 3 Then
+            cell.Value = "=VLOOKUP(,,,)"  '#N/A
+        ElseIf cell.Row() - 45 = 4 Then
+            cell.Value = "=VAR(""&dd&"")" '#VALUE!
+        ElseIf cell.Row() - 45 = 5 Then
+            cell.Value = "=A51" '#REF!
+            Range("A51").Delete Shift:=xlUp
+        ElseIf cell.Row() - 45 = 6 Then
+            cell.Value = "=9.9*10^308" '#NUM!
+        ElseIf cell.Row() - 45 = 7 Then
+            cell.Value = "=SUM(A46:A47 A49:A50)" '#NULL!
+        Else
+            cell.Value = "=Today()"
+        End If
+    Next cell
+    
+    'Set_xlTop10Top
+    For Each cell In Range("A56:E76")
+        cell.Value = cell.Row() - 55
+    Next cell
+    
     ws.Range("A2:I50").EntireColumn.AutoFit
     
 End Function
@@ -242,3 +276,70 @@ Function Set_xlBlanksCondition(SheetName As String)
 
 End Function
 
+Function Set_xlNoErrorsCondition(SheetName As String)
+
+    Dim ws As Worksheet
+    Dim cell As Variant
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    ws.Range("A45").Value = "xlErrorsCondition"
+    
+    ws.Range("B45").Value = "xlNoErrorsCondition"
+    ws.Range("B46:B53").FormatConditions.Add Type:=xlNoErrorsCondition
+    ws.Range("B46:B53").FormatConditions(1).Interior.Color = vbRed
+    
+    ws.Range("C45").Value = "xlErrorsCondition"
+    ws.Range("C46:C53").FormatConditions.Add Type:=xlErrorsCondition
+    ws.Range("C46:C53").FormatConditions(1).Interior.Color = vbGreen
+    
+    ws.Range("A45:C53").EntireColumn.AutoFit
+
+End Function
+
+Function Set_xlTop10Top(SheetName As String)
+
+    Dim ws As Worksheet
+    Dim cell As Variant
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    ws.Range("A55").Value = "xlTop10Top"
+    
+    ws.Range("B55").Value = "xlTop10Top_Count"
+    ws.Range("B56:B76").FormatConditions.AddTop10
+    With Range("B56:B76").FormatConditions(ws.Range("B56:B76").FormatConditions.Count)
+        .TopBottom = xlTop10Top
+        .Rank = 15
+        .Percent = False
+    End With
+    ws.Range("B56:B76").FormatConditions(ws.Range("B56:B76").FormatConditions.Count).Interior.Color = vbRed
+
+    ws.Range("C55").Value = "xlTop10Top_Percent"
+    ws.Range("C56:C76").FormatConditions.AddTop10
+    With Range("C56:C76").FormatConditions(ws.Range("C56:C76").FormatConditions.Count)
+        .TopBottom = xlTop10Top
+        .Rank = 15
+        .Percent = True
+    End With
+    ws.Range("C56:C76").FormatConditions(ws.Range("C56:C76").FormatConditions.Count).Interior.Color = vbGreen
+    
+    ws.Range("D55").Value = "xlTop10Bottom_Count"
+    ws.Range("D56:D76").FormatConditions.AddTop10
+    With Range("D56:D76").FormatConditions(ws.Range("D56:D76").FormatConditions.Count)
+        .TopBottom = xlTop10Bottom
+        .Rank = 15
+        .Percent = False
+    End With
+    ws.Range("D56:D76").FormatConditions(ws.Range("D56:D76").FormatConditions.Count).Interior.Color = vbBlue
+    
+    ws.Range("E55").Value = "xlTop10Bottom_Percent"
+    ws.Range("E56:E76").FormatConditions.AddTop10
+    With Range("E56:E76").FormatConditions(ws.Range("E56:E76").FormatConditions.Count)
+        .TopBottom = xlTop10Bottom
+        .Rank = 15
+        .Percent = True
+    End With
+    ws.Range("E56:E76").FormatConditions(ws.Range("E56:E76").FormatConditions.Count).Interior.Color = vbYellow
+    
+    ws.Range("B56:E76").EntireColumn.AutoFit
+    
+End Function
