@@ -119,11 +119,16 @@ Function Set_Conditional_Sheet(SheetName As String)
     Next cell
     
     'Set_xlTop10Top
-    For Each cell In Range("A56:E76")
+    For Each cell In Range("A56:E75")
         cell.Value = cell.Row() - 55
     Next cell
     
-    ws.Range("A2:I50").EntireColumn.AutoFit
+    'Set_AddAboveAverage
+    For Each cell In Range("A78:G88")
+        cell.Value = cell.Row() - 77
+    Next cell
+    
+    ws.Range("A2:I88").EntireColumn.AutoFit
     
 End Function
 
@@ -305,41 +310,101 @@ Function Set_xlTop10Top(SheetName As String)
     ws.Range("A55").Value = "xlTop10Top"
     
     ws.Range("B55").Value = "xlTop10Top_Count"
-    ws.Range("B56:B76").FormatConditions.AddTop10
-    With Range("B56:B76").FormatConditions(ws.Range("B56:B76").FormatConditions.Count)
+    ws.Range("B56:B75").FormatConditions.AddTop10
+    With Range("B56:B75").FormatConditions(ws.Range("B56:B75").FormatConditions.Count)
         .TopBottom = xlTop10Top
         .Rank = 15
         .Percent = False
     End With
-    ws.Range("B56:B76").FormatConditions(ws.Range("B56:B76").FormatConditions.Count).Interior.Color = vbRed
+    ws.Range("B56:B75").FormatConditions(ws.Range("B56:B75").FormatConditions.Count).Interior.Color = vbRed
 
     ws.Range("C55").Value = "xlTop10Top_Percent"
-    ws.Range("C56:C76").FormatConditions.AddTop10
-    With Range("C56:C76").FormatConditions(ws.Range("C56:C76").FormatConditions.Count)
+    ws.Range("C56:C75").FormatConditions.AddTop10
+    With Range("C56:C75").FormatConditions(ws.Range("C56:C75").FormatConditions.Count)
         .TopBottom = xlTop10Top
         .Rank = 15
         .Percent = True
     End With
-    ws.Range("C56:C76").FormatConditions(ws.Range("C56:C76").FormatConditions.Count).Interior.Color = vbGreen
+    ws.Range("C56:C75").FormatConditions(ws.Range("C56:C75").FormatConditions.Count).Interior.Color = vbGreen
     
     ws.Range("D55").Value = "xlTop10Bottom_Count"
-    ws.Range("D56:D76").FormatConditions.AddTop10
-    With Range("D56:D76").FormatConditions(ws.Range("D56:D76").FormatConditions.Count)
+    ws.Range("D56:D75").FormatConditions.AddTop10
+    With Range("D56:D75").FormatConditions(ws.Range("D56:D75").FormatConditions.Count)
         .TopBottom = xlTop10Bottom
         .Rank = 15
         .Percent = False
     End With
-    ws.Range("D56:D76").FormatConditions(ws.Range("D56:D76").FormatConditions.Count).Interior.Color = vbBlue
+    ws.Range("D56:D75").FormatConditions(ws.Range("D56:D75").FormatConditions.Count).Interior.Color = vbBlue
     
     ws.Range("E55").Value = "xlTop10Bottom_Percent"
-    ws.Range("E56:E76").FormatConditions.AddTop10
-    With Range("E56:E76").FormatConditions(ws.Range("E56:E76").FormatConditions.Count)
+    ws.Range("E56:E75").FormatConditions.AddTop10
+    With Range("E56:E75").FormatConditions(ws.Range("E56:E75").FormatConditions.Count)
         .TopBottom = xlTop10Bottom
         .Rank = 15
         .Percent = True
     End With
-    ws.Range("E56:E76").FormatConditions(ws.Range("E56:E76").FormatConditions.Count).Interior.Color = vbYellow
+    ws.Range("E56:E75").FormatConditions(ws.Range("E56:E75").FormatConditions.Count).Interior.Color = vbYellow
     
-    ws.Range("B56:E76").EntireColumn.AutoFit
+    ws.Range("B56:E75").EntireColumn.AutoFit
     
+End Function
+
+Function Set_AddAboveAverage(SheetName As String)
+
+    Dim ws As Worksheet
+    Dim cell As Variant
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    ws.Range("A77").Value = "AddAboveAverage"
+    
+    ws.Range("B77").Value = "xlAboveAverage"
+    With ws.Range("B78:B88").FormatConditions.AddAboveAverage
+      .AboveBelow = xlAboveAverage
+      With .Interior
+        .Color = vbRed
+      End With
+    End With
+    
+    ws.Range("C77").Value = "xlEqualAboveAverage"
+    With ws.Range("C78:C88").FormatConditions.AddAboveAverage
+      .AboveBelow = xlEqualAboveAverage
+      With .Interior
+        .Color = vbGreen
+      End With
+    End With
+    
+    ws.Range("D77").Value = "xlBelowAverage"
+    With ws.Range("D78:D88").FormatConditions.AddAboveAverage
+      .AboveBelow = xlBelowAverage
+      With .Interior
+        .Color = vbBlue
+      End With
+    End With
+    
+    ws.Range("E77").Value = "xlEqualBelowAverage"
+    With ws.Range("E78:E88").FormatConditions.AddAboveAverage
+      .AboveBelow = xlEqualBelowAverage
+      With .Interior
+        .Color = vbYellow
+      End With
+    End With
+    
+    ws.Range("F77").Value = "xlAboveStdDev"
+    With ws.Range("F78:F88").FormatConditions.AddAboveAverage
+      .AboveBelow = xlAboveStdDev
+      With .Interior
+        .Color = vbMagenta
+      End With
+    End With
+    
+    ws.Range("G77").Value = "xlBelowStdDev"
+    With ws.Range("G78:G88").FormatConditions.AddAboveAverage
+      .AboveBelow = xlBelowStdDev
+      With .Interior
+        .Color = vbCyan
+      End With
+    End With
+    
+    ws.Range("A77:G88").EntireColumn.AutoFit
+
 End Function
