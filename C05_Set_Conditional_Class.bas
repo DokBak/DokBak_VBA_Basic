@@ -128,7 +128,7 @@ Function Set_Conditional_Sheet(SheetName As String)
         cell.Value = cell.Row() - 77
     Next cell
     
-    'Set_AddAboveAverage
+    'Set_AddUniqueValues
     For Each cell In Range("A91:A100")
         cell.Value = cell.Row() - 90
     Next cell
@@ -148,7 +148,15 @@ Function Set_Conditional_Sheet(SheetName As String)
         End If
     Next cell
     
-    ws.Range("A2:I100").EntireColumn.AutoFit
+    'Set_xlExpression
+    For Each cell In Range("A103:A112")
+        cell.Value = cell.Row() - 102
+    Next cell
+    For Each cell In Range("B103:B112")
+        cell.Value = cell.Row() * 4.5
+    Next cell
+    
+    ws.Range("A2:I200").EntireColumn.AutoFit
     
 End Function
 
@@ -449,6 +457,22 @@ Function Set_AddUniqueValues(SheetName As String)
     End With
      
     ws.Range("A90:C100").EntireColumn.AutoFit
+    
+End Function
+
+Function Set_xlExpression(SheetName As String)
+
+    Dim ws As Worksheet
+    Dim cell As Variant
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    ws.Range("A102").Value = "xlExpression"
+    
+    ws.Range("B102").Value = "xlExpression"
+    Range("B103:B112").FormatConditions.Add Type:=xlExpression, Formula1:="=LEN(TRIM(B103:B112))>4"
+    Range("B103:B112").FormatConditions(1).Interior.Color = vbRed
+    
+    ws.Range("A102:B112").EntireColumn.AutoFit
     
 End Function
 
