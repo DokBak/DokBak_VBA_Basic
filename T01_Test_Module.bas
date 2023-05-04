@@ -30,12 +30,12 @@ Sub TS01_Sheet_Class_Test()
     
 End Sub
 
-Sub TS02_Set_Cell_Class_Test()
+Sub TS02_Set_Font_Class_Test()
 
     Dim SheetName As String
     
-    SheetName = "Set_Cell_Class"
-    Set_Cell_Sheet (SheetName)
+    SheetName = "Set_Font_Class"
+    Set_Font_Sheet (SheetName)
     Set_Font_Name (SheetName)
     Set_Font_Size (SheetName)
     Set_Font_Bold (SheetName)
@@ -88,6 +88,11 @@ Sub TS05_Set_Conditional_Class_Test()
     Set_xlTextString (SheetName)
     Set_xlTimePeriod (SheetName)
     Set_xlBlanksCondition (SheetName)
+    Set_xlNoErrorsCondition (SheetName)
+    Set_xlTop10Top (SheetName)
+    Set_AddAboveAverage (SheetName)
+    Set_AddUniqueValues (SheetName)
+    Set_xlExpression (SheetName)
     DeleteSheet (SheetName)
     
 End Sub
