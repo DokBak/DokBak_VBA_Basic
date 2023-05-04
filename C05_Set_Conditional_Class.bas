@@ -128,7 +128,27 @@ Function Set_Conditional_Sheet(SheetName As String)
         cell.Value = cell.Row() - 77
     Next cell
     
-    ws.Range("A2:I88").EntireColumn.AutoFit
+    'Set_AddAboveAverage
+    For Each cell In Range("A91:A100")
+        cell.Value = cell.Row() - 90
+    Next cell
+    For Each cell In Range("B91:C100")
+        If cell.Row() - 90 = 1 Then
+            cell.Value = "Data1"
+        ElseIf cell.Row() - 90 < 5 Then
+            cell.Value = "Data2"
+        ElseIf cell.Row() - 90 = 5 Then
+            cell.Value = "Data3"
+        ElseIf cell.Row() - 90 < 10 Then
+            cell.Value = "Data4"
+        ElseIf cell.Row() - 90 = 10 Then
+            cell.Value = "DATA1"
+        Else
+            cell.Value = "Data6"
+        End If
+    Next cell
+    
+    ws.Range("A2:I100").EntireColumn.AutoFit
     
 End Function
 
@@ -408,3 +428,27 @@ Function Set_AddAboveAverage(SheetName As String)
     ws.Range("A77:G88").EntireColumn.AutoFit
 
 End Function
+
+Function Set_AddUniqueValues(SheetName As String)
+    Dim ws As Worksheet
+    Dim cell As Variant
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    ws.Range("A90").Value = "AddUniqueValues"
+    
+    ws.Range("B90").Value = "xlUnique"
+    With Range("B91:B100").FormatConditions.AddUniqueValues
+       .DupeUnique = xlUnique
+       .Interior.Color = vbRed
+    End With
+    
+    ws.Range("C90").Value = "xlDuplicate"
+    With Range("C91:C100").FormatConditions.AddUniqueValues
+       .DupeUnique = xlDuplicate
+       .Interior.Color = vbGreen
+    End With
+     
+    ws.Range("A90:C100").EntireColumn.AutoFit
+    
+End Function
+
