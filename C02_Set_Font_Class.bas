@@ -18,6 +18,7 @@ Function Set_Font_Sheet(SheetName As String)
     ws.Range("A1:A10").EntireColumn.AutoFit
     
 End Function
+
 Function Set_Font_Name(SheetName As String)
 
     Dim ws As Worksheet
@@ -43,6 +44,7 @@ Function Set_Font_Name(SheetName As String)
     ws.Range("B1:B10").EntireColumn.AutoFit
     
 End Function
+
 Function Set_Font_Size(SheetName As String)
 
     Dim ws As Worksheet
@@ -68,6 +70,7 @@ Function Set_Font_Size(SheetName As String)
     ws.Range("C1:C10").EntireColumn.AutoFit
     
 End Function
+
 Function Set_Font_Bold(SheetName As String)
 
     Dim ws As Worksheet
@@ -87,6 +90,7 @@ Function Set_Font_Bold(SheetName As String)
     ws.Range("D1:D10").EntireColumn.AutoFit
     
 End Function
+
 Function Set_Font_Italic(SheetName As String)
 
     Dim ws As Worksheet
@@ -106,6 +110,7 @@ Function Set_Font_Italic(SheetName As String)
     ws.Range("E1:E10").EntireColumn.AutoFit
     
 End Function
+
 Function Set_Font_Color(SheetName As String)
 
     Dim ws As Worksheet
@@ -131,6 +136,7 @@ Function Set_Font_Color(SheetName As String)
     ws.Range("F1:F10").EntireColumn.AutoFit
     
 End Function
+
 Function Set_Font_Underline(SheetName As String)
 
     Dim ws As Worksheet
@@ -156,6 +162,7 @@ Function Set_Font_Underline(SheetName As String)
     ws.Range("G1:G10").EntireColumn.AutoFit
     
 End Function
+
 Function Set_Font_Strikethrough(SheetName As String)
 
     Dim ws As Worksheet
@@ -175,6 +182,7 @@ Function Set_Font_Strikethrough(SheetName As String)
     ws.Range("H1:H10").EntireColumn.AutoFit
         
 End Function
+
 Function Set_Interior_Color(SheetName As String)
 
     Dim ws As Worksheet
@@ -200,6 +208,7 @@ Function Set_Interior_Color(SheetName As String)
     ws.Range("I1:I10").EntireColumn.AutoFit
     
 End Function
+
 Function Set_Phonetics(SheetName As String)
 
     Dim ws As Worksheet
@@ -312,5 +321,3 @@ Function Set_Borders(SheetName As String)
     ws.Range("L1:M27").EntireColumn.AutoFit
     
 End Function
-
-

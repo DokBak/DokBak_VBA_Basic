@@ -67,6 +67,7 @@ Function Set_Format_Sheet(SheetName As String)
     ws.Range("A1:A25").EntireColumn.AutoFit
     
 End Function
+
 Function Set_NumberFormat_Format(SheetName As String)
 
     Dim ws As Worksheet
@@ -132,6 +133,7 @@ Function Set_NumberFormat_Format(SheetName As String)
     ws.Range("B1:B25").EntireColumn.AutoFit
 
 End Function
+
 Function Set_Data_Format(SheetName As String)
 
     Dim ws As Worksheet

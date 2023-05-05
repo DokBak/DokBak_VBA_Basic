@@ -1,7 +1,6 @@
 Attribute VB_Name = "C05_Set_Conditional_Class"
 Option Explicit
 
-
 Function Set_Conditional_Sheet(SheetName As String)
 
     Dim ws As Worksheet

@@ -25,6 +25,7 @@ Function ThisWorkbookCreateSheets(SheetName As String)
     ws.Name = SheetName & " Sheet After"
     
 End Function
+
 Function ThisWorkbookExists(SheetName As String)
 
     Dim ws As Worksheet
