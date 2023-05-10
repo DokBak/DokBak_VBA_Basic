@@ -105,3 +105,37 @@ Attribute Set_Page_PaperSize.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.PrintCommunication = True
     
 End Function
+
+Function Set_View_xlPageBreakPreview(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ActiveWindow.View = xlPageBreakPreview
+
+End Function
+
+Function Set_View_xlNormalView(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ActiveWindow.View = xlNormalView
+
+End Function
+
+Function Set_View_xlPageLayoutView(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ActiveWindow.View = xlPageLayoutView
+
+End Function
+
