@@ -68,3 +68,62 @@ Function Set_Append_TextFile_OverWrite()
     
 End Function
 
+Function Set_TextFile_NewLine_CRLF_Write()
+
+    Dim FilePath As String
+    Dim FileNumber As Integer
+    Dim TextString As String
+    
+    FilePath = ThisWorkbook.Path & "/test.txt"
+    
+    FileNumber = FreeFile()
+    Open FilePath For Append As #FileNumber
+    
+    TextString = "NewLine_CRLF" & vbCrLf & "Zero Line" & vbCrLf & "First Line" & vbCrLf & "Second Line" & vbCrLf
+    Print #FileNumber, TextString
+    
+    'Linux Command -> od -c test.txt -> ¡Ír¡Ín
+    
+    Close #FileNumber
+    
+End Function
+
+Function Set_TextFile_NewLine_LF_Write()
+
+    Dim FilePath As String
+    Dim FileNumber As Integer
+    Dim TextString As String
+    
+    FilePath = ThisWorkbook.Path & "/test.txt"
+    
+    FileNumber = FreeFile()
+    Open FilePath For Append As #FileNumber
+    
+    TextString = "NewLine_LF" & vbLf & "Zero Line" & vbLf & "First Line" & vbLf & "Second Line" & vbLf
+    Print #FileNumber, TextString
+    
+    'Linux Command -> od -c test.txt -> ¡Ín
+    
+    Close #FileNumber
+    
+End Function
+
+Function Set_TextFile_NewLine_CR_Write()
+
+    Dim FilePath As String
+    Dim FileNumber As Integer
+    Dim TextString As String
+    
+    FilePath = ThisWorkbook.Path & "/test.txt"
+    
+    FileNumber = FreeFile()
+    Open FilePath For Append As #FileNumber
+    
+    TextString = "NewLine_CR" & vbCr & "Zero Line" & vbCr & "First Line" & vbCr & "Second Line" & vbCr
+    Print #FileNumber, TextString
+    
+    'Linux Command -> od -c test.txt -> ¡Ír
+    
+    Close #FileNumber
+    
+End Function
