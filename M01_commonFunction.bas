@@ -378,23 +378,51 @@ Function HideSheet(SheetName As String)
 
 End Function
 
+Function ThisWorkbookExists(SheetName As String)
+
+    Dim ws As Worksheet
+    Dim isSheetExists As Boolean
+    
+    isSheetExists = False
+    
+    For Each ws In ThisWorkbook.Sheets
+        If ws.Name = SheetName Then
+            isSheetExists = True
+            DeleteSheet (SheetName)
+            Exit For
+        End If
+    Next ws
+    
+End Function
+
+Function DeleteSheet(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    ws.Delete
+
+End Function
+
 Sub MainInit()
     Dim SheetName As String
     
     'Validation Sheet Create
     SheetName = "Validation"
+    ThisWorkbookExists (SheetName)
     CreateSheetIfNotExists (SheetName)
     ResizeColumnsInSheet (SheetName)
     ValidationSet (SheetName)
     
     'VersionHistory Sheet Create
     SheetName = "VersionHistory"
+    ThisWorkbookExists (SheetName)
     CreateSheetIfNotExists (SheetName)
     ResizeColumnsInSheet (SheetName)
     VersionHistorySet (SheetName)
     
     'Main Sheet Create
     SheetName = "Main"
+    ThisWorkbookExists (SheetName)
     CreateSheetIfNotExists (SheetName)
     ResizeColumnsInSheet (SheetName)
     
@@ -408,6 +436,7 @@ Sub MainInit()
     'SheetHide
     SheetName = "Validation"
     HideSheet (SheetName)
+    
 End Sub
 
 
