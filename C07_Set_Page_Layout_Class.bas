@@ -161,3 +161,24 @@ Function Set_Group_Rows(SheetName As String)
 
 End Function
 
+Function Set_Ungroup_Columns(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ws.Range("B:E").Columns.Ungroup
+
+End Function
+
+Function Set_Ungroup_Rows(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ws.Range("7:20").Rows.Ungroup
+
+End Function
