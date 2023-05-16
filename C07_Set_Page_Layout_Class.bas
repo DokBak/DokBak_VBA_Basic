@@ -89,18 +89,18 @@ Attribute Set_Page_PaperSize.VB_ProcData.VB_Invoke_Func = " \n14"
         .DifferentFirstPageHeaderFooter = False
         .ScaleWithDocHeaderFooter = True
         .AlignMarginsHeaderFooter = True
-        .EvenPage.LeftHeader.Text = ""
-        .EvenPage.CenterHeader.Text = ""
-        .EvenPage.RightHeader.Text = ""
-        .EvenPage.LeftFooter.Text = ""
-        .EvenPage.CenterFooter.Text = ""
-        .EvenPage.RightFooter.Text = ""
-        .FirstPage.LeftHeader.Text = ""
-        .FirstPage.CenterHeader.Text = ""
-        .FirstPage.RightHeader.Text = ""
-        .FirstPage.LeftFooter.Text = ""
-        .FirstPage.CenterFooter.Text = ""
-        .FirstPage.RightFooter.Text = ""
+        .EvenPage.LeftHeader.text = ""
+        .EvenPage.CenterHeader.text = ""
+        .EvenPage.RightHeader.text = ""
+        .EvenPage.LeftFooter.text = ""
+        .EvenPage.CenterFooter.text = ""
+        .EvenPage.RightFooter.text = ""
+        .FirstPage.LeftHeader.text = ""
+        .FirstPage.CenterHeader.text = ""
+        .FirstPage.RightHeader.text = ""
+        .FirstPage.LeftFooter.text = ""
+        .FirstPage.CenterFooter.text = ""
+        .FirstPage.RightFooter.text = ""
     End With
     Application.PrintCommunication = True
     
@@ -136,6 +136,28 @@ Function Set_View_xlPageLayoutView(SheetName As String)
     Worksheets(SheetName).Activate
     
     ActiveWindow.View = xlPageLayoutView
+
+End Function
+
+Function Set_Group_Columns(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ws.Range("B:E").Columns.Group
+
+End Function
+
+Function Set_Group_Rows(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ws.Range("7:20").Rows.Group
 
 End Function
 
