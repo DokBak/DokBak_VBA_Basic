@@ -1,7 +1,7 @@
 Attribute VB_Name = "C09_Set_Data_Control_Class"
 Option Explicit
 
-Function Set_Page_Layout_Sheet(SheetName As String)
+Function Set_Data_Control_Sheet(SheetName As String)
 
     Dim ws As Worksheet
 
