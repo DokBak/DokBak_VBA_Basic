@@ -183,3 +183,17 @@ Function Set_Ungroup_Rows(SheetName As String)
 
 End Function
 
+Function Set_FreezePanes(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ActiveWindow.FreezePanes = True
+    With ActiveWindow
+        .SplitColumn = 2
+        .SplitRow = 1
+    End With
+
+End Function
