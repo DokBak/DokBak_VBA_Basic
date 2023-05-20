@@ -73,3 +73,41 @@ Function Set_RemoveDuplicates_Header(SheetName As String)
     
 End Function
 
+Function Set_CommentThreaded_ADD(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ws.Range("C6").AddCommentThreaded ("C6 Test Comment")
+
+    ws.Range("B9").AddCommentThreaded ("B9 " & Chr(10))
+    
+End Function
+
+Function Set_CommentThreaded_ADDReply(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ws.Range("C6").CommentThreaded.AddReply ("C6 Test Comment Reply")
+
+    ws.Range("B9").CommentThreaded.AddReply ("B9 " & Chr(10) & "Reply")
+    
+End Function
+
+Function Set_CommentThreaded_Clear(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ws.Range("C6").ClearComments
+
+    ws.Range("B9").ClearComments
+    
+End Function
