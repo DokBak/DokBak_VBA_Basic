@@ -20,6 +20,8 @@ End Sub
 Function Set_Add_Button(SheetName As String)
 
     Dim ws As Worksheet
+    Dim Control_Button As Shape
+    Dim Control_Button_Name As String
     Set ws = ThisWorkbook.Sheets(SheetName)
     
     Worksheets(SheetName).Activate
@@ -44,4 +46,16 @@ Function Set_Add_Button(SheetName As String)
     
 End Function
 
+Function Set_Add_Labels(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ActiveSheet.Labels.Add(50, 70, 150, 30).Select 'X_Position, Y_Position, X_Size, Y_Size
+    'ActiveSheet.Shapes.Range(Array("Check Box 1")).Select 'Check Box Select
+    Selection.Caption = "Label_Text"
+    
+End Function
 
