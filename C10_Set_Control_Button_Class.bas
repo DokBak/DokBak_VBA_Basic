@@ -59,3 +59,20 @@ Function Set_Add_Labels(SheetName As String)
     
 End Function
 
+Function Set_Add_CheckBoxes(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ActiveSheet.CheckBoxes.Add(50, 120, 150, 30).Select 'X_Position, Y_Position, X_Size, Y_Size
+    'ActiveSheet.Shapes.Range(Array("Check Box 1")).Select 'Check Box Select
+    Selection.Caption = "CB1"
+    Selection.Value = False
+    ActiveSheet.CheckBoxes.Add(200, 120, 150, 30).Select 'X_Position, Y_Position, X_Size, Y_Size
+    'ActiveSheet.Shapes.Range(Array("Check Box 2")).Select 'Check Box Select
+    Selection.Caption = "CB2"
+    Selection.Value = True
+    
+End Function
