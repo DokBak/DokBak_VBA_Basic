@@ -94,3 +94,36 @@ Function Set_Add_OptionButtons(SheetName As String)
     Selection.Value = True
     
 End Function
+
+Function Set_Add_ListBoxes(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ActiveSheet.ListBoxes.Add(50, 220, 150, 30).Select 'X_Position, Y_Position, X_Size, Y_Size
+    'ActiveSheet.Shapes.Range(Array("List Box 1")).Select 'ListBox Select
+    Selection.AddItem "Apple"
+    Selection.AddItem "Banana"
+    Selection.AddItem "Peach"
+    Selection.AddItem "Orange"
+    Selection.AddItem "Melon"
+    ActiveSheet.ListBoxes.Add(250, 220, 150, 30).Select 'X_Position, Y_Position, X_Size, Y_Size
+    'ActiveSheet.Shapes.Range(Array("List Box 2")).Select 'ListBox Select
+    'Selection.ColumnCount = 3
+    Selection.AddItem "List1"
+    Selection.AddItem "List2"
+    Selection.AddItem "List3"
+    Selection.AddItem "List4"
+    Selection.AddItem "List5"
+    ActiveSheet.ListBoxes.Add(450, 220, 150, 30).Select 'X_Position, Y_Position, X_Size, Y_Size
+    'ActiveSheet.Shapes.Range(Array("List Box 3")).Select 'ListBox Select
+    Selection.MultiSelect = fmMultiSelectMulti
+    Selection.AddItem "Box1"
+    Selection.AddItem "Box2"
+    Selection.AddItem "Bxo3"
+    Selection.AddItem "Box4"
+    Selection.AddItem "Box5"
+    
+End Function
