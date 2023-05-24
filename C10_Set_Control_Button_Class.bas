@@ -76,3 +76,21 @@ Function Set_Add_CheckBoxes(SheetName As String)
     Selection.Value = True
     
 End Function
+
+Function Set_Add_OptionButtons(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ActiveSheet.OptionButtons.Add(50, 170, 150, 30).Select 'X_Position, Y_Position, X_Size, Y_Size
+    'ActiveSheet.Shapes.Range(Array("Option Button 1")).Select 'Option Button Select
+    Selection.Caption = "OB1"
+    Selection.Value = True
+    ActiveSheet.OptionButtons.Add(200, 170, 150, 30).Select 'X_Position, Y_Position, X_Size, Y_Size
+    'ActiveSheet.Shapes.Range(Array("Option Button 2")).Select 'Option Button Select
+    Selection.Caption = "OB2"
+    Selection.Value = True
+    
+End Function
