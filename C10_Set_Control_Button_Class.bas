@@ -127,3 +127,26 @@ Function Set_Add_ListBoxes(SheetName As String)
     Selection.AddItem "Box5"
     
 End Function
+
+Function Set_Add_DropDowns(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ActiveSheet.DropDowns.Add(50, 270, 150, 30).Select 'X_Position, Y_Position, X_Size, Y_Size
+    'ActiveSheet.Shapes.Range(Array("DropDowns 1")).Select 'DropDowns Select
+    Selection.AddItem "Box1"
+    Selection.AddItem "Box2"
+    Selection.AddItem "Box3"
+    Selection.AddItem "Box4"
+    Selection.AddItem "Box5"
+    Selection.AddItem "Box6"
+    Selection.AddItem "Box7"
+    Selection.AddItem "Box8"
+    Selection.AddItem "Box9"
+    Selection.AddItem "Box10"
+    Selection.AddItem "Box11"
+    
+End Function
