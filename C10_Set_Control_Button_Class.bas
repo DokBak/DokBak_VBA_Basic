@@ -162,3 +162,15 @@ Function Set_Add_ScrollBars(SheetName As String)
     'ActiveSheet.Shapes.Range(Array("ScrollBars 1")).Select 'ScrollBars Select
 
 End Function
+
+Function Set_Add_Spinners(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ActiveSheet.Spinners.Add(50, 370, 30, 50).Select 'X_Position, Y_Position, X_Size, Y_Size
+    'ActiveSheet.Shapes.Range(Array("Spinners 1")).Select 'Spinners Select
+    
+End Function
