@@ -150,3 +150,15 @@ Function Set_Add_DropDowns(SheetName As String)
     Selection.AddItem "Box11"
     
 End Function
+
+Function Set_Add_ScrollBars(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ActiveSheet.ScrollBars.Add(50, 320, 150, 30).Select 'X_Position, Y_Position, X_Size, Y_Size
+    'ActiveSheet.Shapes.Range(Array("ScrollBars 1")).Select 'ScrollBars Select
+
+End Function
