@@ -174,3 +174,15 @@ Function Set_Add_Spinners(SheetName As String)
     'ActiveSheet.Shapes.Range(Array("Spinners 1")).Select 'Spinners Select
     
 End Function
+
+Function Set_Add_GroupBoxes(SheetName As String)
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets(SheetName)
+    
+    Worksheets(SheetName).Activate
+    
+    ActiveSheet.GroupBoxes.Add(50, 520, 300, 300).Select 'X_Position, Y_Position, X_Size, Y_Size
+    'ActiveSheet.Shapes.Range(Array("Group Box 1")).Select
+    
+End Function
